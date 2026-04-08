@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 
 dotenv.config();
+//test
 
 const healthRoutes = require('./routes/healthRoutes');
 const classesRoutes = require('./routes/classesRoutes');
