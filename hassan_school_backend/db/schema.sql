@@ -51,6 +51,7 @@ CREATE TABLE teacher_assigned_classes (
 -- Students
 CREATE TABLE students (
     id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    admission_no            VARCHAR(50) NOT NULL UNIQUE,
     full_name               VARCHAR(150) NOT NULL,
     father_name             VARCHAR(150) NOT NULL,
     date_of_birth           DATE NOT NULL,
