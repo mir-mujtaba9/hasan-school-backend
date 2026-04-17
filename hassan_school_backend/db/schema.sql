@@ -16,6 +16,7 @@ CREATE TYPE student_section AS ENUM ('A', 'B', 'C');
 CREATE TYPE fee_status AS ENUM ('Paid', 'Partial', 'Unpaid', 'Advance');
 CREATE TYPE payment_method AS ENUM ('Cash', 'Bank Transfer', 'Online', 'Cheque');
 CREATE TYPE staff_status AS ENUM ('Active', 'Inactive');
+CREATE TYPE salary_status AS ENUM ('Paid', 'Payable');
 
 -- Classes (for mapping class name -> default monthly fee)
 CREATE TABLE classes (
@@ -156,9 +157,10 @@ CREATE TABLE salary_records (
     month           SMALLINT NOT NULL CHECK (month BETWEEN 1 AND 12),
     year            SMALLINT NOT NULL CHECK (year BETWEEN 2000 AND 2100),
     amount          NUMERIC(10,2) NOT NULL,
-    payment_date    DATE NOT NULL,
-    payment_method  payment_method NOT NULL,
+    payment_date    DATE,
+    payment_method  payment_method,
     receipt_number  VARCHAR(50) UNIQUE,
+    status          salary_status NOT NULL DEFAULT 'Paid',
     notes           TEXT,
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );

@@ -130,4 +130,10 @@ module.exports = {
   login,
   adminLogin,
   teacherLogin,
+  logout: async (req, res) => {
+    // JWT is stateless: server cannot revoke an issued token without a blacklist.
+    // This endpoint exists for frontend parity; client should delete stored token.
+    res.set('Cache-Control', 'no-store');
+    return res.json({ message: 'Logged out successfully' });
+  },
 };

@@ -1,5 +1,66 @@
 const pool = require('../config/db');
 
+const normalizeDiscount = (discount) => {
+  if (discount === undefined || discount === null || discount === '') return undefined;
+
+  if (typeof discount === 'number') {
+    if (discount === 0) return 'No Discount';
+    return `${discount}%`;
+  }
+
+  if (typeof discount === 'string') {
+    const trimmed = discount.trim();
+    if (!trimmed) return undefined;
+
+    if (trimmed.toLowerCase() === 'no discount') return 'No Discount';
+
+    const percentMatch = trimmed.match(/^(\d+(?:\.\d+)?)%$/);
+    if (percentMatch) {
+      const num = Number(percentMatch[1]);
+      if (!Number.isFinite(num)) return trimmed;
+      if (num === 0) return 'No Discount';
+      return `${num}%`;
+    }
+
+    const numOnlyMatch = trimmed.match(/^\d+(?:\.\d+)?$/);
+    if (numOnlyMatch) {
+      const num = Number(trimmed);
+      if (num === 0) return 'No Discount';
+      return `${num}%`;
+    }
+  }
+
+  return discount;
+};
+
+const inferDiscountFromFees = (baseFee, discountedFee) => {
+  if (!Number.isFinite(baseFee) || baseFee <= 0) return null;
+  if (!Number.isFinite(discountedFee) || discountedFee < 0) return null;
+
+  const epsilon = 0.01;
+  const rounded = (value) => Math.round(value * 100) / 100;
+
+  const base = rounded(baseFee);
+  const discounted = rounded(discountedFee);
+
+  if (Math.abs(discounted - base) <= epsilon) return 'No Discount';
+
+  const candidates = [
+    { discount: '25%', factor: 0.75 },
+    { discount: '50%', factor: 0.50 },
+    { discount: '75%', factor: 0.25 },
+    { discount: '100%', factor: 0.0 },
+  ];
+
+  for (const candidate of candidates) {
+    if (Math.abs(discounted - rounded(base * candidate.factor)) <= epsilon) {
+      return candidate.discount;
+    }
+  }
+
+  return null;
+};
+
 // Create a new student (new admission)
 const createStudent = async (req, res) => {
   console.log('Received student creation request:', JSON.stringify(req.body, null, 2));
@@ -55,9 +116,11 @@ const createStudent = async (req, res) => {
     });
   }
 
+  const normalizedDiscount = normalizeDiscount(discount);
+
   // Validate discount value
   const validDiscounts = ['No Discount', '25%', '50%', '75%', '100%'];
-  if (discount && !validDiscounts.includes(discount)) {
+  if (normalizedDiscount && !validDiscounts.includes(normalizedDiscount)) {
     return res.status(400).json({
       error: `Invalid discount. Must be one of: ${validDiscounts.join(', ')}`,
     });
@@ -88,10 +151,15 @@ const createStudent = async (req, res) => {
   }
 
   // Validate discount_reason if discount is not "No Discount"
-  if ((discount && discount !== 'No Discount') && !discount_reason) {
+  if ((normalizedDiscount && normalizedDiscount !== 'No Discount') && !discount_reason) {
     return res.status(400).json({
       error: 'discount_reason is required when discount is not "No Discount"',
     });
+  }
+
+  const discountedFeeInput = discounted_fee !== undefined ? Number(discounted_fee) : undefined;
+  if (discounted_fee !== undefined && !Number.isFinite(discountedFeeInput)) {
+    return res.status(400).json({ error: 'discounted_fee must be a number' });
   }
 
   try {
@@ -101,34 +169,45 @@ const createStudent = async (req, res) => {
       return res.status(404).json({ error: 'Class not found' });
     }
 
-    const class_monthly_fee = classResult.rows[0].monthly_fee;
-    
-    // Calculate discounted_fee based on discount percentage
-    let final_discounted_fee = discounted_fee;
-    let final_monthly_fee = class_monthly_fee;
-    
-    if (!discounted_fee) {
-      // Auto-calculate based on discount
-      const appliedDiscount = discount || 'No Discount';
-      
-      if (appliedDiscount === '25%') {
-        final_discounted_fee = final_monthly_fee * 0.75;
-      } else if (appliedDiscount === '50%') {
-        final_discounted_fee = final_monthly_fee * 0.50;
-      } else if (appliedDiscount === '75%') {
-        final_discounted_fee = final_monthly_fee * 0.25;
-      } else if (appliedDiscount === '100%') {
-        final_discounted_fee = 0;
-      } else {
-        // 'No Discount'
-        final_discounted_fee = final_monthly_fee;
+    const classMonthlyFee = parseFloat(classResult.rows[0].monthly_fee);
+
+    let appliedDiscount = normalizedDiscount;
+    let inferredDiscount = false;
+
+    if (!appliedDiscount && discountedFeeInput !== undefined) {
+      const inferred = inferDiscountFromFees(classMonthlyFee, discountedFeeInput);
+      if (!inferred) {
+        return res.status(400).json({
+          error: 'discounted_fee does not match class fee for a supported discount',
+        });
       }
-      
-      // If discount is applied, set monthly_fee to discounted_fee
-      if (appliedDiscount !== 'No Discount') {
-        final_monthly_fee = final_discounted_fee;
-      }
+      appliedDiscount = inferred;
+      inferredDiscount = true;
     }
+
+    if (!appliedDiscount) {
+      appliedDiscount = 'No Discount';
+    }
+
+    // Always calculate fees from class fee + discount to keep data consistent
+    let final_discounted_fee = classMonthlyFee;
+
+    if (appliedDiscount === '25%') {
+      final_discounted_fee = classMonthlyFee * 0.75;
+    } else if (appliedDiscount === '50%') {
+      final_discounted_fee = classMonthlyFee * 0.50;
+    } else if (appliedDiscount === '75%') {
+      final_discounted_fee = classMonthlyFee * 0.25;
+    } else if (appliedDiscount === '100%') {
+      final_discounted_fee = 0;
+    }
+
+    if (inferredDiscount) {
+      final_discounted_fee = discountedFeeInput;
+    }
+
+    // monthly_fee is always the base class fee
+    const final_monthly_fee = classMonthlyFee;
 
     const result = await pool.query(
       `INSERT INTO students (
@@ -147,7 +226,7 @@ const createStudent = async (req, res) => {
         place_of_birth, mother_tongue, student_phone, father_phone, mother_name, mother_phone,
         emergency_contact_name, emergency_contact_phone, home_address, district, tehsil,
         admission_date, class_id, section, roll_number, previous_school, previous_class,
-        previous_result, final_monthly_fee, discount || 'No Discount', final_discounted_fee, discount_reason, b_form_number,
+        previous_result, final_monthly_fee, appliedDiscount, final_discounted_fee, discount_reason, b_form_number,
         father_cnic, previous_tc_number, medical_condition, notes,
       ]
     );
@@ -299,9 +378,11 @@ const updateStudent = async (req, res) => {
     return res.status(400).json({ error: 'Nothing to update' });
   }
 
+  const normalizedUpdateDiscount = normalizeDiscount(updates.discount);
+
   // Validate discount value if being updated
   const validDiscounts = ['No Discount', '25%', '50%', '75%', '100%'];
-  if (updates.discount && !validDiscounts.includes(updates.discount)) {
+  if (normalizedUpdateDiscount && !validDiscounts.includes(normalizedUpdateDiscount)) {
     return res.status(400).json({
       error: `Invalid discount. Must be one of: ${validDiscounts.join(', ')}`,
     });
@@ -348,9 +429,23 @@ const updateStudent = async (req, res) => {
   }
 
   // Validate discount_reason if discount is being updated to non-"No Discount"
-  if (updates.discount && updates.discount !== 'No Discount' && !updates.discount_reason) {
+  if (normalizedUpdateDiscount && normalizedUpdateDiscount !== 'No Discount' && !updates.discount_reason) {
     return res.status(400).json({
       error: 'discount_reason is required when discount is not "No Discount"',
+    });
+  }
+
+  const updateDiscountedFeeInput = updates.discounted_fee !== undefined
+    ? Number(updates.discounted_fee)
+    : undefined;
+
+  if (updates.discounted_fee !== undefined && !Number.isFinite(updateDiscountedFeeInput)) {
+    return res.status(400).json({ error: 'discounted_fee must be a number' });
+  }
+
+  if (updates.discounted_fee !== undefined && !updates.discount) {
+    return res.status(400).json({
+      error: 'discount is required when discounted_fee is provided',
     });
   }
 
@@ -360,9 +455,9 @@ const updateStudent = async (req, res) => {
     'place_of_birth', 'mother_tongue', 'student_phone', 'father_phone', 'mother_name',
     'mother_phone', 'emergency_contact_name', 'emergency_contact_phone', 'home_address',
     'district', 'tehsil', 'class_id', 'section', 'roll_number', 'previous_school',
-    'previous_class', 'previous_result', 'discount', 'discounted_fee', 'discount_reason',
+    'previous_class', 'previous_result', 'discount', 'discount_reason',
     'b_form_number', 'father_cnic', 'previous_tc_number', 'medical_condition', 'notes',
-    'status', 'leaving_date', 'leaving_reason', 'monthly_fee'
+    'status', 'leaving_date', 'leaving_reason'
   ];
 
   const validUpdates = {};
@@ -377,40 +472,64 @@ const updateStudent = async (req, res) => {
   }
 
   try {
-    // Fetch current student to get monthly_fee for discount calculation
-    const currentStudentResult = await pool.query('SELECT monthly_fee, discount, discounted_fee FROM students WHERE id = $1', [id]);
+    // Fetch current student to get class_id and discount context
+    const currentStudentResult = await pool.query(
+      'SELECT class_id, discount FROM students WHERE id = $1',
+      [id]
+    );
     
     if (currentStudentResult.rowCount === 0) {
       return res.status(404).json({ error: 'Student not found' });
     }
 
     const currentStudent = currentStudentResult.rows[0];
-    
-    // Calculate discounted_fee if discount is being updated or monthly_fee is being updated
-    if ((updates.discount && !updates.discounted_fee) || (updates.monthly_fee && !updates.discounted_fee)) {
-      const monthlyFee = parseFloat(updates.monthly_fee || currentStudent.monthly_fee);
-      const discount = updates.discount || currentStudent.discount;
-      
-      let discountedFee = monthlyFee;
-      
-      // Apply discount percentage
-      if (discount === '25%') {
-        discountedFee = monthlyFee * 0.75;
-      } else if (discount === '50%') {
-        discountedFee = monthlyFee * 0.50;
-      } else if (discount === '75%') {
-        discountedFee = monthlyFee * 0.25;
-      } else if (discount === '100%') {
+
+    const incomingClassId = updates.class_id || currentStudent.class_id;
+    let incomingDiscount = normalizedUpdateDiscount || currentStudent.discount || 'No Discount';
+
+    // Recalculate fees when discount/class changes or discounted_fee is provided
+    if (updates.discount || updates.class_id || updates.discounted_fee !== undefined) {
+      const classResult = await pool.query(
+        'SELECT monthly_fee FROM classes WHERE id = $1',
+        [incomingClassId]
+      );
+
+      if (classResult.rowCount === 0) {
+        return res.status(404).json({ error: 'Class not found' });
+      }
+
+      const classMonthlyFee = parseFloat(classResult.rows[0].monthly_fee);
+
+      if (!normalizedUpdateDiscount && updateDiscountedFeeInput !== undefined) {
+        const inferred = inferDiscountFromFees(classMonthlyFee, updateDiscountedFeeInput);
+        if (!inferred) {
+          return res.status(400).json({
+            error: 'discounted_fee does not match class fee for a supported discount',
+          });
+        }
+        incomingDiscount = inferred;
+        validUpdates.discount = inferred;
+      }
+
+      let discountedFee = classMonthlyFee;
+
+      if (incomingDiscount === '25%') {
+        discountedFee = classMonthlyFee * 0.75;
+      } else if (incomingDiscount === '50%') {
+        discountedFee = classMonthlyFee * 0.50;
+      } else if (incomingDiscount === '75%') {
+        discountedFee = classMonthlyFee * 0.25;
+      } else if (incomingDiscount === '100%') {
         discountedFee = 0;
       }
-      // else: 'No Discount' - discountedFee remains as monthlyFee
-      
-      validUpdates.discounted_fee = discountedFee;
-      
-      // If discount is applied (not "No Discount"), set monthly_fee to discounted_fee
-      if (discount !== 'No Discount') {
-        validUpdates.monthly_fee = discountedFee;
+
+      // monthly_fee always stores the base class fee
+      validUpdates.monthly_fee = classMonthlyFee;
+      if (updateDiscountedFeeInput !== undefined && !normalizedUpdateDiscount) {
+        discountedFee = updateDiscountedFeeInput;
       }
+
+      validUpdates.discounted_fee = discountedFee;
     }
 
     // Build dynamic UPDATE query
