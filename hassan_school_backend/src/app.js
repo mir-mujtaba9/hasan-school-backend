@@ -12,6 +12,9 @@ const studentsRoutes = require('./routes/studentsRoutes');
 const feesRoutes = require('./routes/feesRoutes');
 const staffRoutes = require('./routes/staffRoutes');
 const salaryRoutes = require('./routes/salaryRoutes');
+const expensesRoutes = require('./routes/expensesRoutes');
+const usersRoutes = require('./routes/usersRoutes');
+const reportsRoutes = require('./routes/reportsRoutes');
 
 const app = express();
 
@@ -46,6 +49,9 @@ app.use('/api/v1', studentsRoutes);
 app.use('/api/v1', feesRoutes);
 app.use('/api/v1', staffRoutes);
 app.use('/api/v1', salaryRoutes);
+app.use('/api/v1', expensesRoutes);
+app.use('/api/v1', usersRoutes);
+app.use('/api/v1', reportsRoutes);
 
 app.get('/', (req, res) => {
   res.json({ message: 'Hassan School Backend API' });
