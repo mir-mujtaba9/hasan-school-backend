@@ -5,11 +5,14 @@ const ensureSalarySchema = async () => {
   try {
     await client.query('BEGIN');
 
+    // Ensure we are operating in the expected schema.
+    await client.query('SET search_path TO public');
+
     // 1) Ensure enum type exists
     await client.query(
       `DO $$
        BEGIN
-         CREATE TYPE salary_status AS ENUM ('Paid', 'Payable');
+         CREATE TYPE public.salary_status AS ENUM ('Paid', 'Payable');
        EXCEPTION
          WHEN duplicate_object THEN NULL;
        END $$;`
@@ -27,8 +30,8 @@ const ensureSalarySchema = async () => {
 
     if (statusColumn.rowCount === 0) {
       await client.query(
-        `ALTER TABLE salary_records
-         ADD COLUMN status salary_status NOT NULL DEFAULT 'Paid'`
+        `ALTER TABLE public.salary_records
+         ADD COLUMN status public.salary_status NOT NULL DEFAULT 'Paid'`
       );
     }
 
@@ -45,7 +48,7 @@ const ensureSalarySchema = async () => {
     for (const row of nullability.rows || []) {
       if (row.is_nullable === 'NO') {
         await client.query(
-          `ALTER TABLE salary_records
+          `ALTER TABLE public.salary_records
            ALTER COLUMN ${row.column_name} DROP NOT NULL`
         );
       }

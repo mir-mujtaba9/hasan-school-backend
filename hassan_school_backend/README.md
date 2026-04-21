@@ -32,6 +32,80 @@ Node.js + Express + PostgreSQL backend for the Hassan School frontend.
 
 The API will start on `http://localhost:4000` by default.
 
+## Move Database from pgAdmin4 (local Postgres) to Neon
+
+pgAdmin4 is a client/UI; your actual database is PostgreSQL. Migrating means moving from your local PostgreSQL server to Neon’s hosted PostgreSQL.
+
+### Step 1 — Create a Neon project + database
+
+1. Create a Neon project.
+2. In **Connection Details**, copy the connection string.
+   - For a normal Node/Express server, pick **Direct connection**.
+   - If you deploy to serverless/edge, pick **Pooled connection**.
+
+### Step 2 — Export your local database (from your current Postgres)
+
+You have two clean ways:
+
+**A) Using pgAdmin (GUI)**
+
+1. In pgAdmin: right-click your database → **Backup…**
+2. Format: **Custom** (recommended) or **Plain**
+3. Save the backup file.
+
+**B) Using CLI (recommended for reliability)**
+
+Plain SQL dump (simple restore):
+
+```bash
+pg_dump --no-owner --no-privileges -h <LOCAL_HOST> -p <LOCAL_PORT> -U <LOCAL_USER> <LOCAL_DB> > backup.sql
+```
+
+### Step 3 — Import into Neon
+
+**If you created `backup.sql` (plain SQL):**
+
+```bash
+psql "<YOUR_NEON_DATABASE_URL>" < backup.sql
+```
+
+**If you created a Custom backup from pgAdmin (`.backup`):**
+
+```bash
+pg_restore --no-owner --no-privileges --dbname "<YOUR_NEON_DATABASE_URL>" < backup.backup
+```
+
+### Step 4 — Point this backend to Neon
+
+In your `.env` (see `.env.example`), set:
+
+```bash
+DATABASE_URL=<YOUR_NEON_DATABASE_URL>
+PGSSL=true
+```
+
+If you ever see errors like "no schema has been selected to create in", set:
+
+```bash
+PGSCHEMA=public
+```
+
+Then run the server: `npm run dev`
+
+### Step 5 — Verify
+
+- `GET /api/v1/db-health` should return `{ status: 'ok', dbTime: ... }`
+
+### Alternative: Fresh schema (no old data)
+
+If you want a clean database, run your schema + seeds against Neon:
+
+```bash
+psql "<YOUR_NEON_DATABASE_URL>" -f db/schema.sql
+psql "<YOUR_NEON_DATABASE_URL>" -f db/seed_classes.sql
+node db/seed_teachers.js
+```
+
 ## Health Endpoints
 
 - `GET /` – Basic welcome message.
