@@ -314,7 +314,8 @@ const listStudents = async (req, res) => {
     const dataParams = [...params, limitNum, offset];
     const query = `
       SELECT id, admission_no, full_name, father_name, date_of_birth, gender, class_id, 
-             section, roll_number, status, monthly_fee, discount, created_at 
+             section, roll_number, status, monthly_fee, discount,
+             father_phone, home_address, created_at 
       FROM students 
       ${whereClause}
       ORDER BY admission_no ASC
