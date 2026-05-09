@@ -1,0 +1,18 @@
+id,full_name,father_name,date_of_birth,gender,religion,nationality,place_of_birth,mother_tongue,student_phone,father_phone,mother_name,mother_phone,emergency_contact_name,emergency_contact_phone,home_address,district,tehsil,admission_date,class_id,section,roll_number,previous_school,previous_class,previous_result,monthly_fee,discount,discounted_fee,discount_reason,b_form_number,father_cnic,previous_tc_number,medical_condition,notes,status,leaving_date,leaving_reason,created_at,updated_at,admission_no
+,ABDUL QADOOS ,MUHAMMED KHUSHAL,,Male,Islam,Pakistani,,,,03145169016,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-68
+,KAMAL JAVED,MIR MUHAMMAD JAVED,,Male,Islam,Pakistani,,,,03425081276,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-69
+,MUNEEB SULMAN,MUHAMMED SULMAN ,,Male,Islam,Pakistani,,,,03415260731,,,,,,,,,10,,,,,,2700,75%,675,Financial Supoort,,,,,,Active,,,,,ADM20-71
+,ANJAM BABER,BABER HUSSAIN,,Male,Islam,Pakistani,,,,03022236193,,,,,,,,,10,,,,,,2700,100%,0,,,,,,,Active,,,,,ADM20-72
+,MAHOOZ WAQAR,MIR WAQAR HUSSAIN,,Male,Islam,Pakistani,,,,03448893263,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-73
+,HAREEM,RAJA ABDUL REHMAN ,,Female,Islam,Pakistani,,,,03441559302,,,,,,,,,10,,,,,,2700,50%,1350,Third child,,,,,,Active,,,,,ADM20-77
+,GHOUSIA SHAHID,HAFIZ SHAHID,,Female,Islam,Pakistani,,,,03125543559,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-80
+,NAEEM ZIA,ZIA-UR-REHMAN,30/09/2012,Male,Islam,Pakistani,,,,3489619946,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-81
+,SHAHZAIB AZIZ,ABDUL AZIZ,22/05/2008,Male,Islam,Pakistani,,,,03131517432,,,,,,,,28/04/2014,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-82
+,FARHAN ALI,ZAHOOR AHMED ,11/5/2011,Male,Islam,Pakistani,,,,03469656143,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-83
+,SEWARA ZAMAN,BADI-O-ZAMAN,,Female,Islam,Pakistani,,,,03469656143,,,,,,,,5/1/2013,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-84
+,FARHEEN ZAMAN,ALI ZAMAN ,,Female,Islam,Pakistani,,,,03179373513,,,,,,,,,10,,,,,,2700,50%,1350,Financial Problem,,,,,,Active,,,,,ADM20-94
+,ANUM ZULFIQAR,ZULFIQAR AHMAD,,Female,Islam,Pakistani,,,,,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-338
+,ANEESA HAMEED,HAMEED,,Female,Islam,Pakistani,,,,,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,ADM20-468
+,LAIBA KHURSHID,KHURSHID,,Female,Islam,Pakistani,,,,,,,,,,,,,10,,,,,,2700,No Discount,2700,,,,,,,Active,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
