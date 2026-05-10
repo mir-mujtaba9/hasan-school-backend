@@ -1,0 +1,68 @@
+id,full_name,father_name,date_of_birth,gender,religion,nationality,place_of_birth,mother_tongue,student_phone,father_phone,mother_name,mother_phone,emergency_contact_name,emergency_contact_phone,home_address,district,tehsil,admission_date,class_id,section,roll_number,previous_school,previous_class,previous_result,monthly_fee,discount,discounted_fee,discount_reason,b_form_number,father_cnic,previous_tc_number,medical_condition,notes,status,leaving_date,leaving_reason,created_at,updated_at,admission_no
+,AYESHA BATOOL,MATI-UR-REHMAN,01/01/1900,Female,Islam,Pakistani,,,,3413818045,,,,,Dhayalla,,,01/03/2014,9,,,,,,2500,None,2500,,,,,,,Active,,,,,ADM20-88
+,KISHWAR WAQAR,MIR WAQAR HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3448893263,,,,,Charyealla,,,01/03/2014,9,,,,,,2500,None,2500,,,,,,,Active,,,,,ADM20-90
+,TAYYBA ANVEER,MUHAMMAD ANVEER,01/01/1900,Female,Islam,Pakistani,,,,3461686508,,,,,Jabbar,,,01/03/2014,9,,,,,,2500,50%,1250,Parent illness,,,,,,Active,,,,,ADM20-93
+,HADIQA WARIS,MUHAMMAD WARIS,31/02/2011,Female,Islam,Pakistani,,,,3476521688,,,,,Jabbar,,,26/04/2017,9,,,,,,2500,None,2500,,,,,,,Active,,,,,ADM20-105
+,MAHNOOR FATIMA,MIR NAVEED AHMED,31/01/2012,Female,Islam,Pakistani,,,,3455398334,,,,,Dhayalla,,,04/01/2016,9,,,,,,2500,None,2500,,,,,,,Active,,,,,ADM20-107
+,ATTIQUE RIAZ,RIAZ,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2014,9,,,,,,2500,None,2000,,,,,,,Active,,,,,
+,ALEENA NOWAZ,MIR NOWAZ HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3419309287,,,,,Mahdaan,,,01/03/2015,8,,,,,,2000,100%,1000,Orphan,,,,,,Active,,,,,ADM20-92
+,AYESHA NASEER,MUHAMMAD NASEER,18/11/2011,Female,Islam,Pakistani,,,,3556291716,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-110
+,AREESH FATIMA,MUBARAK HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3459583201,,,,,Masrooba,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-111
+,SALWA ISHFAQ,ISHFAQ AHMED,01/01/1900,Female,Islam,Pakistani,,,,3459583201,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-113
+,OBIDA TANVEER,MIR MUHAMMAD TANVEER,8/8/2012,Female,Islam,Pakistani,,,,3481516366,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-114
+,RAZWAN ALI,MUHAMMAD KASEER,01/01/1900,Male,Islam,Pakistani,,,,3454163338,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-115
+,MUJTABA WAZA,WAZA-UL-REHMAN,01/01/1900,Male,Islam,Pakistani,,,,3175994827,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-120
+,ABYAR BABER,BABER HUSSAIN,31/11/2012,Female,Islam,Pakistani,,,,3022236193,,,,,Nakkah,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-123
+,SAJAL ZAFOOR,MIR ZAFOOR HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3169436679,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-137
+,ABDUL REHMAN,RIAZ AZAM,01/01/1900,Male,Islam,Pakistani,,,,3418978212,,,,,Uthli Bari,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-282
+,ZANIB AFZAL,MUHAMMAD AFZAL,01/01/1900,Female,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-293
+,SHAFAT MUSHKOOR,MIR MUSHKOOR HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,2000,,,,,,,Active,,,,,ADM20-296
+,MUJTABA ZAHEER,MIR ZAHEER,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,1800,,,,,,,Active,,,,,ADM20-398
+,MEHRIA ZULFIQAR,ZULFIQAR,01/01/1900,Female,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2015,8,,,,,,2000,None,1800,,,,,,,Active,,,,,ADM20-414
+,MUHAMMAD AKASH,SHEHZAD,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2015,8,,,,,,2000,100%,0,Parent illness,,,,,,Active,,,,,ADM20-416
+,HINA TAYYAB,MIR MUHAMMED TAYYAB,01/01/1900,Female,Islam,Pakistani,,,,3421957613,,,,,Panna,,,01/03/2016,7,,,,,,1800,None,1800,,,,,,,Active,,,,,ADM20-139
+,RUBAB SAJID,SAJID HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3414181623,,,,,Unknown,,,01/03/2016,7,,,,,,1800,None,1800,,,,,,,Active,,,,,ADM20-141
+,KHAJIDA MUNIR,MUNIR AHMED,01/01/1900,Female,Islam,Pakistani,,,,3411542430,,,,,Unknown,,,01/03/2016,7,,,,,,1800,None,1800,,,,,,,Active,,,,,ADM20-142
+,MAHROOB NADEEM,MUHAMMAD NADEEM,01/01/1900,Female,Islam,Pakistani,,,,3423154732,,,,,Unknown,,,01/03/2016,7,,,,,,1800,100%,0,Orphan,,,,,,Active,,,,,ADM20-144
+,FALAK  BIBI,ABDUL REHMAN,01/01/1900,Male,Islam,Pakistani,,,,3484819188,,,,,Unknown,,,01/03/2016,7,,,,,,1800,50%,900,Financial Suport,,,,,,Active,,,,,ADM20-149
+,IRTAZA ULFAT,MIR ULFAT HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3444322931,,,,,Garran,,,01/03/2016,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-150
+,SAIF ALI,SAQIB TABSUM,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2016,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-154
+,USAM JAVED,MIR MUHAMMAD JAVED,01/01/1900,Male,Islam,Pakistani,,,,3425081276,,,,,Mahdaan,,,01/03/2016,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-155
+,SEEMA BIBI,MUHAMMAD ORANGZAIB,01/01/1900,Male,Islam,Pakistani,,,,3475436740,,,,,Unknown,,,01/03/2016,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-156
+,IMAN FATIMA,MIR WALLI MUSTAN,29/11/2012,Female,Islam,Pakistani,,,,3109381426,,,,,Garran,,,04/01/2017,7,,,,,,1800,50%,900,Scholarship,,,,,,Active,,,,,ADM20-161
+,DUA NOOR,MIR MADOOD HUSSAIN,22/05/2013,Female,Islam,Pakistani,,,,3129286499,,,,,Garran,,,30/03/2017,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-256
+,SAIF UR REHMAN,SAJID HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3414181623,,,,,Unknown,,,01/03/2016,7,,,,,,1800,None,1700,,,,,,,Active,,,,,ADM20-335
+,RIFFAT MUSHTAQ,MIR MUSHTAQ AHMAD,01/01/1900,Female,Islam,Pakistani,,,,3450892675,,,,,Mahdaan,,,01/03/2016,7,,,,,,1800,50%,900,2nd child (SHAZIA),,,,,,Active,,,,,ADM20-147
+,RIZWAN ALI,ZAHOOR AHMED,01/01/1900,Male,Islam,Pakistani,,,,3469656143,,,,,Unknown,,,01/03/2016,7,,,,,,1800,50%,900,Financial Difficulty,,,,,,Active,,,,,ADM20-157
+,ALESHBA ANVEER,MUHAMMAD ANVEER,01/01/1900,Female,Islam,Pakistani,,,,3461686508,,,,,Unknown,,,01/03/2017,6,,,,,,1700,100%,0,Financial Difficulty,,,,,,Active,,,,,ADM20-164
+,MEHRIA SHAHID,HAFIZ SHAHID,01/01/1900,Female,Islam,Pakistani,,,,3125543559,,,,,Dhayalla,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-166
+,HADIA,RAJA ABDUL REHMAN,01/01/1900,Female,Islam,Pakistani,,,,3441559302,,,,,Unknown,,,01/03/2017,6,,,,,,1700,50%,850,3rd child,,,,,,Active,,,,,ADM20-167
+,ORWA ISHFAQ,ISHFAQ AHMED,01/01/1900,Female,Islam,Pakistani,,,,3459583201,,,,,Unknown,,,01/03/2017,6,,,,,,1700,50%,850,Financial Difficulty,,,,,,Active,,,,,ADM20-168
+,SAIM ALI,MUHAMMAD KASEER,01/01/1900,Male,Islam,Pakistani,,,,3454163338,,,,,Unknown,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-171
+,BILAL BABER,BABER HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3022236193,,,,,Nakkah,,,01/03/2017,6,,,,,,1700,50%,850,2nd child,,,,,,Active,,,,,ADM20-176
+,MEHMONA KHALID,MUHAMMAD KHALID,9/5/2014,Female,Islam,Pakistani,,,,3418902220,,,,,Unknown,,,05/08/2018,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-182
+,MALIKA SAFEER,SAFEER AHMED,4/10/2014,Female,Islam,Pakistani,,,,3467157420,,,,,Unknown,,,04/08/2018,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-183
+,MOSHIN YAMEEN,MUHAMMAD YAMIN,01/01/1900,Male,Islam,Pakistani,,,,3458088427,,,,,Dhayalla,,,04/02/2018,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-188
+,WAJID ESHRAT,MIR ESHRAT HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3025112654,,,,,Dhayalla,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-190
+,FAJAR IMAN,MIR ZAFOOR HUSSAIN,14/01/2015,Female,Islam,Pakistani,,,,3169436679,,,,,Garran,,,08/04/2018,6,,,,,,1700,50%,850,Financial Support,,,,,,Active,,,,,ADM20-257
+,MARVI FATIMA,TANZEEL UL RAHMAN,01/01/1900,Female,Islam,Pakistani,,,,3349486107,,,,,Panna,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-271
+,AMINA LIAQAT,LIAQAT HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,0,,,,,Masrooba,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-464
+,SABEELA ISHFAQ,ISHFAQ,01/01/1900,Female,Islam,Pakistani,,,,3440537773,,,,,Unknown,,,01/03/2017,6,,,,,,1700,100%,0,4th child,,,,,,Active,,,,,ADM20-169
+,Ghosia  Zulfiqar,Zulfiqar,01/01/1900,Female,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2017,6,,,,,,1700,None,1700,,,,,,,Active,,,,,
+,FATIMA NASHAL,MUHAMMED NASHAL,01/01/1900,Female,Islam,Pakistani,,,,3420764813,,,,,Unknown,,,01/03/2018,5,,,,,,1700,None,1700,Parent illness,,,,,,Active,,,,,ADM20-191
+,SAMIRA KHUSHAL,MUHAMMED KHUSHAL,01/01/1900,Female,Islam,Pakistani,,,,3145169016,,,,,Uthli Bari,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-192
+,JANNAT-UL-BAKIA,MIR NOWAZ HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3419309287,,,,,Unknown,,,01/03/2018,5,,,,,,1700,100%,0,Orphan,,,,,,Active,,,,,ADM20-193
+,WARISHA IQBAL,JAHANGIR IQBAL,01/01/1900,Female,Islam,Pakistani,,,,3459586797,,,,,Mandyalla,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-194
+,ZANIB NASEER,MUHAMMAD NASEER,01/01/1900,Female,Islam,Pakistani,,,,3556291716,,,,,Unknown,,,01/03/2018,5,,,,,,1700,50%,850,4th child,,,,,,Active,,,,,ADM20-195
+,AMIN FITIMA,MUNSIF HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3129152628,,,,,Dhayalla,,,01/03/2018,5,,,,,,1700,50%,850,3RD CHILD,,,,,,Active,,,,,ADM20-197
+,USAM SAJJID,SAJID HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3414181623,,,,,Dhayalla,,,01/03/2018,5,,,,,,1700,50%,850,Financial Difficulty,,,,,,Active,,,,,ADM20-198
+,ABAD HUSSAIN,MIR AMDAD HUSSAIN,01/01/1900,Male,Islam,Pakistani,,,,3455954189,,,,,Unknown,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-199
+,ABDUL MANAN,CHOHDARY RAEES,01/01/1900,Male,Islam,Pakistani,,,,3125324580,,,,,Unknown,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-200
+,BABER BILAL,MIR MUHAMMAD BILAL,01/01/1900,Male,Islam,Pakistani,,,,3447266077,,,,,Panna,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-201
+,ANAYA NISAR,MIR NISAR AHMED,01/01/1900,Female,Islam,Pakistani,,,,3463153419,,,,,Unknown,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-204
+,KASHIF WAQAR,MIR WAQAR HUSSAIN,01/01/1900,Female,Islam,Pakistani,,,,3448893263,,,,,Charyealla,,,01/03/2018,5,,,,,,1700,100%,0,4th child,,,,,,Active,,,,,ADM20-207
+,HINA FATIMA,MIR WALLI MUSTAN,20/06/2014,Female,Islam,Pakistani,,,,3109381426,,,,,Garran,,,04/02/2018,5,,,,,,1700,50%,850,3rd child,,,,,,Active,,,,,ADM20-208
+,ZAINAB BATOOL,MATI-UR-REHMAN,01/01/1900,Female,Islam,Pakistani,,,,3413818045,,,,,Dhayalla,,,01/03/2018,5,,,,,,1700,50%,850,3rd child,,,,,,Active,,,,,ADM20-220
+,SKAHWAT IKRAM,MUHAMMAD IKRAM,01/01/1900,Male,Islam,Pakistani,,,,0,,,,,Unknown,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-310
+,IRAJ ZAHEER,MIR M ZAHEER,01/01/1900,Female,Islam,Pakistani,,,,3449560684,,,,,Panna,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-145
+,ALEENA ZAHEER,ZAHEER IQBAL,01/01/1900,Female,Islam,Pakistani,,,,0,,,,,Mandyalla,,,01/03/2018,5,,,,,,1700,None,1700,,,,,,,Active,,,,,ADM20-380
