@@ -64,7 +64,7 @@ const inferDiscountFromFees = (baseFee, discountedFee) => {
 // Create a new student (new admission)
 const createStudent = async (req, res) => {
   console.log('Received student creation request:', JSON.stringify(req.body, null, 2));
-  
+
   const {
     admission_no,
     full_name,
@@ -237,7 +237,7 @@ const createStudent = async (req, res) => {
     });
   } catch (err) {
     console.error('Create student error:', err.code, err.message, err.detail);
-    
+
     // Handle specific database error codes
     if (err.code === '23505') {
       return res.status(409).json({ error: 'Admission number already exists' });
@@ -256,9 +256,9 @@ const createStudent = async (req, res) => {
       // Foreign key constraint violation
       return res.status(400).json({ error: 'Invalid class_id: Class not found' });
     }
-    
+
     // Generic error with more details
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Failed to create student',
       details: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
@@ -267,11 +267,11 @@ const createStudent = async (req, res) => {
 
 // List all students with search, filtering, and pagination
 const listStudents = async (req, res) => {
-  const { class_id, status, search, page = 1, limit = 10 } = req.query;
-  
+  const { class_id, status, search, page = 1, limit = 200 } = req.query;
+
   try {
     const pageNum = Math.max(1, parseInt(page) || 1);
-    const limitNum = Math.min(100, Math.max(1, parseInt(limit) || 10));
+    const limitNum = Math.min(1000, Math.max(1, parseInt(limit) || 200));
     const offset = (pageNum - 1) * limitNum;
 
     // Build dynamic WHERE clause
@@ -344,13 +344,13 @@ const listStudents = async (req, res) => {
 // Get student by ID
 const getStudentById = async (req, res) => {
   const { id } = req.params;
-  
+
   // Validate UUID format
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (!uuidRegex.test(id)) {
     return res.status(400).json({ error: 'Invalid student ID format. Expected UUID.' });
   }
-  
+
   try {
     const result = await pool.query('SELECT * FROM students WHERE id = $1', [id]);
     if (result.rowCount === 0) {
@@ -366,13 +366,13 @@ const getStudentById = async (req, res) => {
 // Update student
 const updateStudent = async (req, res) => {
   const { id } = req.params;
-  
+
   // Validate UUID format
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (!uuidRegex.test(id)) {
     return res.status(400).json({ error: 'Invalid student ID format. Expected UUID.' });
   }
-  
+
   const updates = req.body;
 
   if (Object.keys(updates).length === 0) {
@@ -478,7 +478,7 @@ const updateStudent = async (req, res) => {
       'SELECT class_id, discount FROM students WHERE id = $1',
       [id]
     );
-    
+
     if (currentStudentResult.rowCount === 0) {
       return res.status(404).json({ error: 'Student not found' });
     }
@@ -549,7 +549,7 @@ const updateStudent = async (req, res) => {
     });
   } catch (err) {
     console.error('Update student error:', err.code, err.message, err.detail);
-    
+
     if (err.code === '23505') {
       return res.status(409).json({ error: 'Admission number already exists' });
     }
@@ -567,9 +567,9 @@ const updateStudent = async (req, res) => {
       // Foreign key constraint violation
       return res.status(400).json({ error: 'Invalid class_id: Class not found' });
     }
-    
+
     console.error('Update student error:', err);
-    return res.status(500).json({ 
+    return res.status(500).json({
       error: 'Failed to update student',
       details: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
@@ -579,13 +579,13 @@ const updateStudent = async (req, res) => {
 // Delete student
 const deleteStudent = async (req, res) => {
   const { id } = req.params;
-  
+
   // Validate UUID format
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (!uuidRegex.test(id)) {
     return res.status(400).json({ error: 'Invalid student ID format. Expected UUID.' });
   }
-  
+
   try {
     const result = await pool.query('DELETE FROM students WHERE id = $1 RETURNING id', [id]);
     if (result.rowCount === 0) {
